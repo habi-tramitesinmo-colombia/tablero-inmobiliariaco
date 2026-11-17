@@ -2,6 +2,7 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Semáforo de Gestión de Desembolsos · Habi</title>
 <style>
   :root{
@@ -35,7 +36,7 @@
 
   .topbar{
     display:flex; align-items:center; justify-content:flex-end;
-    padding:14px 24px; margin:0 -24px 26px; background:#fff; border-bottom:1px solid var(--line);
+    padding:14px 24px; margin:0 0 26px; background:#fff; border-bottom:1px solid var(--line);
     position:relative; overflow:hidden; flex-wrap:wrap; gap:10px; min-height:66px;
   }
   .topbar::after{
@@ -110,13 +111,27 @@
   .month-track{ flex:1; height:8px; background:#EEF0F2; border-radius:99px; overflow:hidden; }
   .month-fill{ height:100%; border-radius:99px; background:var(--habi-purple); }
   .month-fill.pending{ background:var(--amber); }
-  .month-value{ width:72px; text-align:right; color:var(--ink-soft); font-weight:700; flex:none; }
+  .month-value{ width:96px; text-align:right; color:var(--ink-soft); font-weight:700; flex:none; white-space:nowrap; font-variant-numeric:tabular-nums; }
 
-  .tabs{ display:flex; gap:8px; margin-bottom:20px; border-bottom:1px solid var(--line); }
-  .tab-btn{
-    border:none; background:none; color:var(--ink-soft); font-size:13.5px; font-weight:700;
-    padding:10px 16px; cursor:pointer; border-bottom:2px solid transparent; margin-bottom:-1px;
+  .nav{ margin-bottom:22px; }
+  .area-tabs{
+    display:inline-flex; gap:4px; padding:4px; background:#EDEBF3; border-radius:12px; margin-bottom:14px;
   }
+  .area-btn{
+    display:flex; align-items:center; gap:8px; border:none; background:none; cursor:pointer;
+    font-family:inherit; font-size:14px; font-weight:700; color:var(--ink-soft);
+    padding:9px 18px; border-radius:9px; transition:background .15s, color .15s;
+  }
+  .area-btn:hover{ color:var(--ink); }
+  .area-btn.active{ background:#fff; color:var(--habi-purple-dark); box-shadow:0 1px 3px rgba(17,24,39,.12); }
+  .area-btn:focus-visible, .tab-btn:focus-visible{ outline:2px solid var(--habi-purple); outline-offset:2px; }
+  .tabs{ display:flex; gap:4px; border-bottom:1px solid var(--line); }
+  .tabs.una-vista .tab-btn{ cursor:default; }
+  .tab-btn{
+    border:none; background:none; color:var(--ink-soft); font-size:13.5px; font-weight:700; font-family:inherit;
+    padding:10px 14px; cursor:pointer; border-bottom:2px solid transparent; margin-bottom:-1px; white-space:nowrap;
+  }
+  .tab-btn[hidden]{ display:none; }
   .tab-btn:hover{ color:var(--ink); }
   .tab-btn.active{ color:var(--habi-purple); border-bottom-color:var(--habi-purple); }
   .tab-panel{ display:none; }
@@ -424,6 +439,54 @@
   .dia-leyenda{ display:flex; flex-wrap:wrap; gap:6px 16px; font-size:11.5px; color:var(--ink-soft); margin-top:8px; }
   .dia-leyenda i{ display:inline-block; width:10px; height:10px; border-radius:3px; margin-right:6px; vertical-align:-1px; }
   .dia-analista-row.sel{ background:#F3EEFD; }
+
+  /* Cifras: dígitos del mismo ancho para que las columnas se alineen */
+  td, .metric-value, .estimate-value, .dia-big{ font-variant-numeric:tabular-nums; }
+
+  /* ---- Celular y tablet ---- */
+  @media (max-width:720px){
+    .wrap{ padding:0 14px 40px; }
+    .topbar{ margin:0 0 16px; padding:10px 14px; justify-content:space-between; min-height:0; }
+    .topbar::after{ display:none; }
+    .habi-logo{ position:static; transform:none; flex-direction:row; gap:8px; }
+    .habi-mark{ width:32px; }
+    .habi-caption{ font-size:10px; }
+    .sync-status{ font-size:11px; }
+    .refresh-btn{ padding:6px 10px; }
+
+    .area-tabs{ display:flex; width:100%; }
+    .area-btn{ flex:1; justify-content:center; padding:9px 6px; font-size:12.5px; gap:5px; }
+    .area-btn svg{ display:none; }
+    .tabs{ overflow-x:auto; scrollbar-width:none; -webkit-overflow-scrolling:touch; }
+    .tabs::-webkit-scrollbar{ display:none; }
+    .tab-btn{ padding:10px 12px; font-size:13px; }
+
+    .metric-card{ min-width:calc(50% - 7px); }
+    .month-card{ min-width:100%; }
+    .estimate-card{ padding:16px 18px; }
+    .estimate-value{ font-size:26px; }
+    .estimate-note{ text-align:left; max-width:none; }
+    .month-label{ width:auto !important; max-width:42%; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+    .month-value{ width:auto !important; }
+
+    .toolbar, .metrics-toolbar{ align-items:stretch; }
+    .search-box{ min-width:0; width:100%; }
+    select, input:not([type="checkbox"]):not([type="radio"]){ min-width:0 !important; max-width:100%; }
+    .filters select, .metrics-toolbar select{ flex:1 1 140px; }
+
+    .chart-card, .table-card{ padding-left:14px; padding-right:14px; overflow-x:auto; }
+    .table-scroll{ max-height:70vh; }
+
+    .overlay{ padding:0; align-items:flex-end; }
+    .modal, #t-overlay .modal{ max-width:100% !important; border-radius:16px 16px 0 0; max-height:92vh; padding:18px 16px 22px; }
+    .modal-row{ flex-wrap:wrap; }
+    #t-overlay .edit-select{ min-width:0; width:100%; }
+    .edit-row{ flex-wrap:wrap; }
+    .edit-row label, #t-overlay .edit-row label{ width:100%; margin-bottom:-2px; }
+    .edit-row input[type="date"], .edit-row input[type="text"], .edit-row .edit-select{ flex:1 1 0; min-width:0 !important; width:auto; }
+    .modal-row span:last-child{ overflow-wrap:anywhere; }
+    .section-title{ display:block; line-height:1.4; }
+  }
 </style>
 </head>
 <body>
@@ -446,15 +509,22 @@
 
   <div class="banner" id="banner">⚠️ No se pudo conectar en vivo al Google Sheet — mostrando datos de ejemplo.</div>
 
-  <div class="tabs">
-    <button class="tab-btn active" data-tab="resumen">📋 Registro</button>
-    <button class="tab-btn" data-tab="mensual">📊 Desembolsos por mes</button>
-    <button class="tab-btn" data-tab="metricas">📈 Métricas</button>
-    <button class="tab-btn" data-tab="tramites">🏗️ Trámites</button>
-    <button class="tab-btn" data-tab="tramites-metricas">📈 Métricas Trámites</button>
-    <button class="tab-btn" data-tab="tramites-desemb">💰 Desembolsos Trámites</button>
-    <button class="tab-btn" data-tab="verano">🏛️ Estudio de Títulos Verano</button>
-  </div>
+  <nav class="nav" aria-label="Secciones del tablero">
+    <div class="area-tabs">
+      <button class="area-btn active" data-area="registro"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="3" width="16" height="18" rx="2"/><path d="M8 8h8M8 12h8M8 16h5"/></svg><span>Registro</span></button>
+      <button class="area-btn" data-area="tramites"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><path d="M9 13l2 2 4-4"/></svg><span>Trámites</span></button>
+      <button class="area-btn" data-area="verano"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 21h18M5 21V10M19 21V10M9 21v-6h6v6M2 10l10-6 10 6"/></svg><span>Estudio de títulos</span></button>
+    </div>
+    <div class="tabs" role="tablist">
+      <button class="tab-btn active" data-tab="resumen" data-area="registro">Negocios</button>
+      <button class="tab-btn" data-tab="mensual" data-area="registro">Desembolsos por mes</button>
+      <button class="tab-btn" data-tab="metricas" data-area="registro">Métricas</button>
+      <button class="tab-btn" data-tab="tramites" data-area="tramites" hidden>Negocios</button>
+      <button class="tab-btn" data-tab="tramites-metricas" data-area="tramites" hidden>Métricas y gestión diaria</button>
+      <button class="tab-btn" data-tab="tramites-desemb" data-area="tramites" hidden>Desembolsos</button>
+      <button class="tab-btn" data-tab="verano" data-area="verano" hidden>Estudio de Títulos Verano</button>
+    </div>
+  </nav>
 
   <div class="tab-panel active" id="tab-resumen">
     <div class="section-title">Métricas generales</div>
@@ -1287,9 +1357,11 @@ function fmtFecha(f){
   const [y,m,d] = f.split("-");
   return `${d}/${m}/${y}`;
 }
+// Millones con separador de miles y coma decimal (formato colombiano): $ 2.694,4 M
+const FMT_MILLONES = new Intl.NumberFormat("es-CO", { minimumFractionDigits: 0, maximumFractionDigits: 1 });
 function fmtValor(v){
   if(!v) return "—";
-  return "$" + (v/1000000).toFixed(1).replace(".0","") + "M";
+  return "$ " + FMT_MILLONES.format(v / 1000000) + " M";
 }
 
 // ---- Mapeo de una fila cruda del CSV a nuestro modelo ----
@@ -1949,14 +2021,48 @@ document.getElementById("show-finalizados").addEventListener("change", e=>{
 });
 
 // ---- Pestañas ----
+// Tres áreas (Registro, Trámites, Estudio de títulos), cada una con sus vistas.
+// El enlace recuerda la vista abierta (#tramites-metricas, etc.).
+const ultimaVistaPorArea = {};
+function mostrarVista(tab, actualizarEnlace = true){
+  const btn = document.querySelector(`.tab-btn[data-tab="${tab}"]`);
+  if(!btn) return;
+  const area = btn.dataset.area;
+  document.querySelectorAll(".area-btn").forEach(b => {
+    const on = b.dataset.area === area;
+    b.classList.toggle("active", on);
+    b.setAttribute("aria-pressed", on ? "true" : "false");
+  });
+  const vistasArea = [...document.querySelectorAll(".tab-btn")].filter(b => b.dataset.area === area);
+  document.querySelectorAll(".tab-btn").forEach(b => {
+    b.hidden = b.dataset.area !== area;
+    b.classList.toggle("active", b === btn);
+    b.setAttribute("aria-selected", b === btn ? "true" : "false");
+  });
+  document.querySelector(".tabs").classList.toggle("una-vista", vistasArea.length < 2);
+  document.querySelectorAll(".tab-panel").forEach(p => p.classList.remove("active"));
+  document.getElementById("tab-" + tab).classList.add("active");
+  ultimaVistaPorArea[area] = tab;
+  if(actualizarEnlace){
+    try{ history.replaceState(null, "", "#" + tab); }catch(e){}
+  }
+}
 document.querySelectorAll(".tab-btn").forEach(btn=>{
+  btn.addEventListener("click", ()=> mostrarVista(btn.dataset.tab));
+});
+document.querySelectorAll(".area-btn").forEach(btn=>{
   btn.addEventListener("click", ()=>{
-    document.querySelectorAll(".tab-btn").forEach(b => b.classList.remove("active"));
-    document.querySelectorAll(".tab-panel").forEach(p => p.classList.remove("active"));
-    btn.classList.add("active");
-    document.getElementById("tab-" + btn.dataset.tab).classList.add("active");
+    const area = btn.dataset.area;
+    const primera = document.querySelector(`.tab-btn[data-area="${area}"]`);
+    mostrarVista(ultimaVistaPorArea[area] || primera.dataset.tab);
   });
 });
+function vistaDesdeEnlace(){
+  const h = (location.hash || "").replace(/^#/, "");
+  mostrarVista(document.querySelector(`.tab-btn[data-tab="${h}"]`) ? h : "resumen", false);
+}
+window.addEventListener("hashchange", vistaDesdeEnlace);
+vistaDesdeEnlace();
 
 // ---- Render tabla ----
 function renderTable(rows){
