@@ -448,6 +448,72 @@
   /* Cifras: dígitos del mismo ancho para que las columnas se alineen */
   td, .metric-value, .estimate-value, .dia-big{ font-variant-numeric:tabular-nums; }
 
+  /* ---- Dirección ---- */
+  .dir-cabecera{ display:flex; justify-content:space-between; align-items:flex-start; gap:16px; flex-wrap:wrap; margin-bottom:14px; }
+  .dir-titulo{ font-size:22px; font-weight:700; letter-spacing:-.015em; margin:0 0 4px; color:var(--ink); }
+  .dir-sub{ font-size:13px; color:var(--ink-soft); max-width:78ch; line-height:1.5; }
+  .dir-acciones{ display:flex; gap:8px; align-items:center; flex-wrap:wrap; }
+  .dir-frase{ font-size:15.5px; line-height:1.65; color:var(--ink); max-width:86ch; margin:0 0 20px; padding:14px 18px; background:var(--card); border:1px solid var(--line); border-left:3px solid var(--habi-purple); border-radius:var(--radius); }
+  .dir-frase b{ font-weight:700; }
+  .dir-kpis{ display:grid; grid-template-columns:repeat(auto-fit, minmax(200px, 1fr)); gap:14px; margin-bottom:18px; }
+  .kpi{ background:var(--card); border:1px solid var(--line); border-radius:var(--radius); padding:16px 18px; display:flex; flex-direction:column; gap:4px; }
+  .kpi-destacado{ border-color:#D9C9F7; background:linear-gradient(180deg, var(--purple-tint), #fff 70%); }
+  .kpi-valor{ font-size:28px; font-weight:700; letter-spacing:-.02em; color:var(--ink); font-variant-numeric:tabular-nums; line-height:1.15; }
+  .kpi-linea{ font-size:12px; line-height:1.6; }
+  .kpi-delta{ font-weight:700; color:var(--ink-soft); }
+  .kpi-delta.up{ color:var(--green); }
+  .kpi-delta.down{ color:var(--red); }
+  .kpi-delta-txt{ color:var(--ink-soft); }
+  .dir-grafico{ margin-bottom:18px; }
+  .dir-destacados{ display:grid; grid-template-columns:repeat(auto-fit, minmax(220px, 1fr)); gap:14px; }
+  .dest-card{ text-align:left; font-family:inherit; background:var(--card); border:1px solid var(--line); border-radius:var(--radius); padding:16px 18px; cursor:pointer; display:flex; flex-direction:column; gap:3px; transition:border-color .15s; }
+  .dest-card:hover{ border-color:var(--habi-purple); }
+  .dest-card:focus-visible{ outline:2px solid var(--habi-purple); outline-offset:2px; }
+  .dest-titulo{ font-size:12.5px; color:var(--ink-soft); font-weight:600; }
+  .dest-valor{ font-size:22px; font-weight:700; color:var(--ink); }
+  .dest-sub{ font-size:12px; color:var(--ink-soft); }
+  .dest-ir{ font-size:12.5px; color:var(--habi-purple); font-weight:700; margin-top:6px; }
+  .dir-aviso{ font-size:13px; line-height:1.5; padding:11px 14px; border-radius:8px; background:var(--amber-bg); color:#7C4A03; margin-bottom:14px; }
+  .dir-aviso[hidden]{ display:none; }
+  .dir-nota{ font-size:12px; color:var(--ink-soft); line-height:1.55; margin-top:12px; max-width:90ch; }
+  table.dir-tabla{ min-width:640px; }
+  .dir-tabla tbody td{ padding:11px 14px; }
+  .dir-tabla thead th{ padding:10px 14px; }
+  .fila-click{ cursor:pointer; }
+  .fila-sel td{ background:var(--purple-tint); }
+  .dir-punto{ display:inline-block; width:9px; height:9px; border-radius:50%; margin-right:8px; vertical-align:middle; }
+  .dir-barra-celda{ display:flex; align-items:center; gap:10px; min-width:170px; }
+  .dir-barra{ position:relative; flex:1; height:8px; background:var(--track); border-radius:99px; overflow:hidden; }
+  .dir-barra span{ position:absolute; left:0; top:0; bottom:0; border-radius:99px; background:#A78BFA; }
+  .dir-barra span.dem{ background:var(--red); }
+  .dir-barra span.ok{ background:var(--green); }
+  .dir-barra span.med{ background:#D97706; }
+  .solo-impresion{ display:none; }
+
+  /* ---- Impresión / PDF del resumen directivo ---- */
+  @media print{
+    @page{ size:A4 portrait; margin:12mm; }
+    html, body{ background:#fff !important; }
+    body{ -webkit-print-color-adjust:exact; print-color-adjust:exact; font-size:12px; }
+    .topbar, .nav, .banner, .no-print, .overlay, .t-toast, .dest-ir{ display:none !important; }
+    .wrap{ max-width:none; padding:0; }
+    .tab-panel{ display:none !important; }
+    #tab-dir-resumen{ display:block !important; }
+    #tab-dir-resumen > .esqueleto{ display:none !important; }
+    .solo-impresion{ display:flex; justify-content:space-between; align-items:baseline; border-bottom:1px solid var(--line); padding-bottom:8px; margin-bottom:14px; }
+    .imp-titulo{ font-weight:700; font-size:13px; }
+    .imp-fecha{ font-size:11px; color:var(--ink-soft); }
+    .dir-titulo{ font-size:20px; }
+    .dir-frase{ font-size:13px; padding:10px 14px; }
+    .dir-kpis{ grid-template-columns:repeat(3, 1fr); gap:8px; }
+    .kpi{ padding:10px 12px; break-inside:avoid; }
+    .kpi-valor{ font-size:20px; }
+    .chart-card, .dest-card{ break-inside:avoid; box-shadow:none; }
+    .dir-destacados{ grid-template-columns:repeat(3, 1fr); gap:8px; }
+    .dest-card{ padding:10px 12px; }
+    .dest-valor{ font-size:17px; }
+  }
+
   /* ---- Esqueleto mientras llegan los datos ---- */
   .tab-panel.cargando > :not(.esqueleto){ display:none !important; }
   .tab-panel:not(.cargando) > .esqueleto{ display:none; }
@@ -458,6 +524,25 @@
   .esqueleto-nota{ font-size:12.5px; color:var(--ink-soft); margin:4px 0 12px; }
   @keyframes esqBrillo{ 0%{ background-position:100% 0; } 100%{ background-position:0 0; } }
   @media (prefers-reduced-motion: reduce){ .esq{ animation:none; } }
+
+  /* ---- Acceso con código ---- */
+  .login-overlay{ z-index:80; background:var(--bg); }
+  .login-box{ max-width:380px; text-align:center; padding:30px 28px 26px; box-shadow:0 10px 30px rgba(17,24,39,.08); border:1px solid var(--line); }
+  .login-logo{ width:48px; height:auto; margin:0 auto 10px; display:block; }
+  .login-titulo{ font-size:19px; font-weight:700; margin:0 0 6px; }
+  .login-texto{ font-size:13.5px; color:var(--ink-soft); margin:0 0 18px; line-height:1.5; }
+  .login-input{ width:100%; font-family:inherit; font-size:15px; padding:11px 12px; border:1px solid var(--line); border-radius:9px; text-align:center; letter-spacing:.06em; }
+  .login-input:focus{ outline:none; border-color:var(--habi-purple); box-shadow:0 0 0 3px rgba(109,40,217,.12); }
+  .login-recordar{ display:flex; align-items:center; justify-content:center; gap:6px; font-size:12.5px; color:var(--ink-soft); margin:12px 0 4px; }
+  .login-error{ min-height:18px; font-size:12.5px; color:var(--red); margin:6px 0 10px; }
+  .login-btn{ width:100%; padding:11px 16px; }
+  .login-btn:disabled{ opacity:.7; cursor:default; }
+  .sesion-chip{ display:flex; align-items:center; gap:6px; font-size:12px; color:var(--ink-soft); border:1px solid var(--line); border-radius:999px; padding:3px 4px 3px 10px; }
+  .sesion-chip[hidden]{ display:none; }
+  .sesion-chip button{ border:none; background:var(--track); color:var(--ink); font-family:inherit; font-size:11.5px; font-weight:700; border-radius:999px; padding:4px 9px; cursor:pointer; }
+  /* Solo consulta: se ocultan los controles de edición (el servidor tampoco los acepta) */
+  .rol-consulta .edit-section, .rol-consulta .comment-new, .rol-consulta .finalizar-box{ display:none !important; }
+  .rol-consulta .v-estado-select{ pointer-events:none; }
 
   /* ---- Confirmación propia ---- */
   .confirmar-overlay{ z-index:70; }
@@ -513,6 +598,14 @@
     .modal-row{ flex-wrap:wrap; }
     #t-overlay .edit-select{ min-width:0; width:100%; }
     .confirmar-acciones{ flex-direction:column-reverse; }
+    .dir-titulo{ font-size:19px; }
+    .dir-frase{ font-size:14px; padding:12px 14px; }
+    .dir-kpis{ grid-template-columns:1fr 1fr; gap:10px; }
+    .kpi{ padding:12px 14px; }
+    .kpi-valor{ font-size:22px; }
+    .dir-acciones{ width:100%; }
+    .dir-acciones select{ flex:1 1 160px; }
+    .area-btn{ font-size:11.5px; padding:9px 4px; }
     .confirmar-acciones button{ width:100%; }
     .edit-row{ flex-wrap:wrap; }
     .edit-row label, #t-overlay .edit-row label{ width:100%; margin-bottom:-2px; }
@@ -532,11 +625,24 @@
     </div>
   </div>
   <div class="topbar-right">
+    <div class="sesion-chip" id="sesion-chip" hidden><span id="sesion-rol">Equipo</span><button type="button" id="sesion-salir" title="Cerrar sesión en este equipo">Salir</button></div>
     <div class="sync-status" id="sync-status"><span class="sync-dot" id="sync-dot"></span><span id="sync-text">Conectando…</span></div>
     <button class="refresh-btn" id="refresh-btn">
       <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 1 1-2.64-6.36"/><path d="M21 3v6h-6"/></svg>
       Actualizar todo
     </button>
+  </div>
+</div>
+
+<div class="overlay login-overlay" id="login-overlay" role="dialog" aria-modal="true" aria-labelledby="login-titulo">
+  <div class="modal login-box">
+    <img class="login-logo" src="" alt="" id="login-logo">
+    <h2 class="login-titulo" id="login-titulo">Tablero Inmobiliaria</h2>
+    <p class="login-texto">Ingresa el código de acceso que te compartió el equipo de Habi.</p>
+    <input type="password" id="login-codigo" class="login-input" autocomplete="current-password" placeholder="Código de acceso" aria-label="Código de acceso">
+    <label class="login-recordar"><input type="checkbox" id="login-recordar" checked> Recordar en este equipo</label>
+    <div class="login-error" id="login-error" role="alert"></div>
+    <button type="button" class="btn-pri login-btn" id="login-entrar">Entrar</button>
   </div>
 </div>
 
@@ -557,12 +663,17 @@
 
   <nav class="nav" aria-label="Secciones del tablero">
     <div class="area-tabs">
-      <button class="area-btn active" data-area="registro"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="3" width="16" height="18" rx="2"/><path d="M8 8h8M8 12h8M8 16h5"/></svg><span>Registro</span></button>
+      <button class="area-btn active" data-area="direccion"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg><span>Dirección</span></button>
+      <button class="area-btn" data-area="registro"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="3" width="16" height="18" rx="2"/><path d="M8 8h8M8 12h8M8 16h5"/></svg><span>Registro</span></button>
       <button class="area-btn" data-area="tramites"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><path d="M9 13l2 2 4-4"/></svg><span>Trámites</span></button>
       <button class="area-btn" data-area="verano"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 21h18M5 21V10M19 21V10M9 21v-6h6v6M2 10l10-6 10 6"/></svg><span>Estudio de títulos</span></button>
     </div>
     <div class="tabs" role="tablist">
-      <button class="tab-btn active" data-tab="resumen" data-area="registro">Negocios</button>
+      <button class="tab-btn active" data-tab="dir-resumen" data-area="direccion">Resumen</button>
+      <button class="tab-btn" data-tab="dir-cuellos" data-area="direccion">Cuellos de botella</button>
+      <button class="tab-btn" data-tab="dir-proyeccion" data-area="direccion">Proyección</button>
+      <button class="tab-btn" data-tab="dir-calidad" data-area="direccion">Calidad de datos</button>
+      <button class="tab-btn" data-tab="resumen" data-area="registro" hidden>Negocios</button>
       <button class="tab-btn" data-tab="mensual" data-area="registro">Desembolsos por mes</button>
       <button class="tab-btn" data-tab="metricas" data-area="registro">Métricas</button>
       <button class="tab-btn" data-tab="tramites" data-area="tramites" hidden>Negocios</button>
@@ -572,7 +683,96 @@
     </div>
   </nav>
 
-  <div class="tab-panel active" id="tab-resumen">
+  <!-- ================= DIRECCIÓN ================= -->
+  <div class="tab-panel" id="tab-dir-resumen">
+    <div class="solo-impresion">
+      <div class="imp-titulo">Tablero Inmobiliaria Habi · Resumen directivo</div>
+      <div class="imp-fecha" id="dir-imp-fecha"></div>
+    </div>
+    <div class="dir-cabecera">
+      <div>
+        <h2 class="dir-titulo" id="dir-titulo">Resumen</h2>
+        <div class="dir-sub" id="dir-sub"></div>
+      </div>
+      <div class="dir-acciones no-print">
+        <select class="analista-select" id="dir-mes" aria-label="Mes del resumen"></select>
+        <button type="button" class="btn-sec" id="dir-pdf">Descargar PDF</button>
+      </div>
+    </div>
+    <p class="dir-frase" id="dir-frase"></p>
+    <div class="dir-kpis" id="dir-kpis"></div>
+    <div class="chart-card dir-grafico">
+      <div class="chart-card-title">Desembolsos por mes</div>
+      <div class="dir-sub" style="margin:-8px 0 12px;">Valor según la fecha de la columna AP. En el mes en curso, la parte clara es el cierre estimado.</div>
+      <div id="dir-chart"></div>
+    </div>
+    <div class="dir-destacados" id="dir-destacados"></div>
+  </div>
+
+  <div class="tab-panel" id="tab-dir-cuellos">
+    <div class="dir-cabecera">
+      <div>
+        <h2 class="dir-titulo">Cuellos de botella</h2>
+        <div class="dir-sub" id="dir-c-sub"></div>
+      </div>
+      <div class="dir-acciones no-print">
+        <select class="analista-select" id="dir-c-analista" aria-label="Analista"></select>
+      </div>
+    </div>
+    <div class="dir-aviso" id="dir-c-aviso" hidden></div>
+    <div class="chart-card">
+      <div class="chart-card-title">Etapas de legalización · clic en una etapa para ver sus negocios</div>
+      <div class="table-scroll"><table class="dir-tabla" id="dir-c-tabla"></table></div>
+    </div>
+    <div class="chart-card">
+      <div class="chart-card-title" id="dir-c-lista-titulo">Los negocios más demorados</div>
+      <div class="table-scroll"><table class="dir-tabla" id="dir-c-lista"></table></div>
+    </div>
+  </div>
+
+  <div class="tab-panel" id="tab-dir-proyeccion">
+    <div class="dir-cabecera">
+      <div>
+        <h2 class="dir-titulo" id="dir-p-titulo">Proyección de desembolsos</h2>
+        <div class="dir-sub">Cuánto se espera radicar en lo que queda del mes, según la etapa de desembolso (columna AV) de cada negocio en curso que aún no tiene fecha en AP.</div>
+      </div>
+    </div>
+    <div class="dir-kpis" id="dir-p-kpis"></div>
+    <div class="chart-card">
+      <div class="chart-card-title">Aporte por etapa de desembolso</div>
+      <div class="table-scroll"><table class="dir-tabla" id="dir-p-tabla"></table></div>
+      <div class="dir-nota" id="dir-p-nota"></div>
+    </div>
+    <div class="chart-card">
+      <div class="chart-card-title">Negocios que más aportan a la proyección</div>
+      <div class="table-scroll"><table class="dir-tabla" id="dir-p-lista"></table></div>
+    </div>
+  </div>
+
+  <div class="tab-panel" id="tab-dir-calidad">
+    <div class="dir-cabecera">
+      <div>
+        <h2 class="dir-titulo">Calidad de datos</h2>
+        <div class="dir-sub">Revisión automática de los negocios en curso de Trámites. Un negocio está completo si tiene analista, etapa de legalización, etapa de desembolso, valor y fecha de gestión.</div>
+      </div>
+    </div>
+    <div class="dir-aviso" id="dir-q-aviso" hidden></div>
+    <div class="dir-kpis" id="dir-q-kpis"></div>
+    <div class="chart-card">
+      <div class="chart-card-title">Revisiones · clic en una para ver los negocios</div>
+      <div class="table-scroll"><table class="dir-tabla" id="dir-q-tabla"></table></div>
+    </div>
+    <div class="chart-card" id="dir-q-detalle-card" hidden>
+      <div class="chart-card-title" id="dir-q-detalle-titulo"></div>
+      <div class="table-scroll"><table class="dir-tabla" id="dir-q-detalle"></table></div>
+    </div>
+    <div class="chart-card">
+      <div class="chart-card-title">Calidad por analista</div>
+      <div class="table-scroll"><table class="dir-tabla" id="dir-q-analistas"></table></div>
+    </div>
+  </div>
+
+  <div class="tab-panel" id="tab-resumen">
     <div class="section-title">Métricas generales</div>
     <div class="metrics" id="metrics"></div>
 
@@ -1581,6 +1781,7 @@ function gvizToRows(data){
 }
 
 async function loadData(isManual){
+  if(!ACCESO.listo) return;
   const btn = document.getElementById("refresh-btn");
   const dot = document.getElementById("sync-dot");
   const text = document.getElementById("sync-text");
@@ -1589,7 +1790,9 @@ async function loadData(isManual){
 
   try{
     let rows;
-    try{
+    if(ACCESO.activo){
+      rows = await leerFuenteProtegida("registro");
+    } else try{
       const gvizData = await loadViaJSONP(GVIZ_JSONP_URL, 20000);
       if(!gvizData || !gvizData.table) throw new Error("Respuesta gviz inválida");
       rows = gvizToRows(gvizData);
@@ -2078,13 +2281,612 @@ document.getElementById("show-finalizados").addEventListener("change", e=>{
 
 // ---- Pestañas ----
 
+
+// ================= CONTROL DE ACCESO =================
+// Si el Apps Script tiene códigos configurados (configurarAcceso), el tablero pide uno al entrar
+// y todas las lecturas y guardados pasan por el Apps Script con ese código.
+// Código de EQUIPO: ve y edita. Código de CONSULTA: solo ve (pensado para dirección).
+const ACCESO = { listo:false, activo:false, rol:"abierto", codigo:"" };
+const ACCESO_LS = "habi_tablero_codigo";
+let accesoContador = 0;
+
+function leerCodigoGuardado(){ try{ return localStorage.getItem(ACCESO_LS) || ""; }catch(e){ return ""; } }
+function guardarCodigo(c){ try{ c ? localStorage.setItem(ACCESO_LS, c) : localStorage.removeItem(ACCESO_LS); }catch(e){} }
+
+async function consultarSesion(codigo){
+  const cb = "__waSesion" + (++accesoContador);
+  const url = `${WEBAPP_URL}?action=sesion&codigo=${encodeURIComponent(codigo || "")}&callback=${cb}`;
+  return jsonpGenerico(url, cb, 9000);
+}
+
+async function leerFuenteProtegida(fuente){
+  const cb = "__wa_" + fuente + "_" + (++accesoContador);
+  const url = `${WEBAPP_URL}?action=leer&fuente=${fuente}&codigo=${encodeURIComponent(ACCESO.codigo)}&callback=${cb}`;
+  let data;
+  try{ data = await jsonpGenerico(url, cb, 30000); }
+  catch(e){ throw new Error("el Apps Script no respondió al leer " + fuente); }
+  if(data && data.acceso && !data.success){ sesionVencida(); throw new Error(data.error || "Código no válido"); }
+  if(!data || !data.success){
+    const err = new Error((data && data.error) || "sin datos");
+    if(data && data.noExiste) err.noExiste = true;
+    throw err;
+  }
+  return data.rows;
+}
+
+function aplicarRol(){
+  document.body.classList.toggle("rol-consulta", ACCESO.rol === "consulta");
+  const chip = document.getElementById("sesion-chip");
+  if(chip){
+    chip.hidden = !ACCESO.activo;
+    document.getElementById("sesion-rol").textContent = ACCESO.rol === "consulta" ? "Solo consulta" : "Equipo";
+  }
+}
+
+function mostrarLogin(mensaje){
+  const ov = document.getElementById("login-overlay");
+  document.getElementById("login-error").textContent = mensaje || "";
+  ov.classList.add("show");
+  setTimeout(() => document.getElementById("login-codigo").focus(), 50);
+}
+
+let sesionAvisada = false;
+function sesionVencida(){
+  if(sesionAvisada) return;
+  sesionAvisada = true;
+  ACCESO.listo = false;
+  guardarCodigo("");
+  mostrarLogin("Tu código ya no es válido (pudo haber cambiado). Ingresa el código vigente.");
+}
+
+function arrancarCargas(){
+  ACCESO.listo = true;
+  sesionAvisada = false;
+  aplicarRol();
+  loadData(false);
+  loadTramitesData();
+  loadVeranoData();
+  cargarHistorialEtapas();
+}
+
+async function iniciarSesion(){
+  const guardado = leerCodigoGuardado();
+  let r = null;
+  try{ r = await consultarSesion(guardado); } catch(e){ r = null; }
+  if(!r || r.acceso === undefined){
+    // Apps Script anterior o sin respuesta: el tablero funciona abierto, como antes.
+    ACCESO.activo = false; ACCESO.rol = "abierto";
+    arrancarCargas();
+    return;
+  }
+  ACCESO.activo = !!r.acceso;
+  if(!ACCESO.activo){ ACCESO.rol = "abierto"; arrancarCargas(); return; }
+  if(r.success && r.rol){
+    ACCESO.rol = r.rol; ACCESO.codigo = guardado;
+    arrancarCargas();
+  } else {
+    guardarCodigo("");
+    mostrarLogin(r.error && guardado ? r.error : "");
+  }
+}
+
+async function enviarLogin(){
+  const input = document.getElementById("login-codigo");
+  const btn = document.getElementById("login-entrar");
+  const codigo = input.value.trim();
+  if(!codigo){ document.getElementById("login-error").textContent = "Escribe el código."; return; }
+  btn.disabled = true; btn.textContent = "Verificando…";
+  let r = null;
+  try{ r = await consultarSesion(codigo); } catch(e){ r = null; }
+  btn.disabled = false; btn.textContent = "Entrar";
+  if(!r){ document.getElementById("login-error").textContent = "No hubo respuesta del servidor. Revisa tu conexión e inténtalo de nuevo."; return; }
+  if(!r.success || !r.rol){ document.getElementById("login-error").textContent = r.error || "Código no válido."; input.select(); return; }
+  ACCESO.activo = true; ACCESO.rol = r.rol; ACCESO.codigo = codigo;
+  if(document.getElementById("login-recordar").checked) guardarCodigo(codigo);
+  document.getElementById("login-overlay").classList.remove("show");
+  input.value = "";
+  arrancarCargas();
+}
+document.getElementById("login-logo").src = document.querySelector(".habi-mark").src;
+document.getElementById("login-entrar").addEventListener("click", enviarLogin);
+document.getElementById("login-codigo").addEventListener("keydown", e => { if(e.key === "Enter") enviarLogin(); });
+document.getElementById("sesion-salir").addEventListener("click", () => {
+  guardarCodigo("");
+  location.reload();
+});
+
+
+// ================= DIRECCIÓN =================
+// Vistas para dirección: resumen, cuellos de botella, proyección y calidad de datos.
+// Usa los datos de Trámites, la Bitácora, el HistorialEtapas y Verano. Los supuestos de abajo
+// deben ser IGUALES a los de Codigo.gs (correo semanal) para que las cifras coincidan.
+const UMBRAL_DIAS_ETAPA = 10;          // días hábiles en una etapa para considerarla demorada
+const PROYECCION_PESOS = {             // probabilidad de radicar el desembolso, según la etapa en AV
+  "RADICADO DESEMBOLSO": 0.95, "DESEMBOLSADO": 0.95, "PTE ENVIO PARA DESEMBOLSO": 0.9, "PTE DE RADICAR": 0.85,
+  "EN FIRMAS DE ENTIDAD": 0.7, "CIERRE NOTARIAL": 0.6, "PTE LIQUIDACION REGISTRO": 0.5, "OK BOLETA": 0.4,
+  "PTE AVANCE NOTARIA": 0.35, "CANCELACION DE HIPOTECA DESEMBOLSO MIXTO": 0.3, "PTE CTL": 0.3, "PTE BOLETA": 0.15
+};
+const PROYECCION_PESO_SIN_ETAPA = 0.1;
+const PROB_INMINENTE = 0.85;           // desde aquí se asume que radica este mes sin importar los días que queden
+const HISTORIAL_SHEET_NAME = "HistorialEtapas";
+const MESES_LARGOS = ["enero","febrero","marzo","abril","mayo","junio","julio","agosto","septiembre","octubre","noviembre","diciembre"];
+
+let hEtapas = [];                 // [{fecha, nid, tipo, etapa, origen}] en orden de registro
+let hEstado = "pendiente";        // pendiente | activa | sin-historial | error
+let dirMesSel = "";               // "" = mes en curso
+let dirCuelloEtapa = "";          // etapa elegida en cuellos de botella
+let dirCuelloAnalista = "todos";
+let dirCalidadSel = "";
+
+function mesNombre(ym){ return MESES_LARGOS[+ym.slice(5, 7) - 1] + " " + ym.slice(0, 4); }
+function mesSumar(ym, n){ const d = new Date(+ym.slice(0, 4), +ym.slice(5, 7) - 1 + n, 1); return d.getFullYear() + "-" + String(d.getMonth() + 1).padStart(2, "0"); }
+function diasHabilesMes(y, m0, desdeDia){
+  let n = 0; const d = new Date(y, m0, desdeDia);
+  while(d.getMonth() === m0){ if(!esFinDeSemana(d)) n++; d.setDate(d.getDate() + 1); }
+  return n;
+}
+function pctTxt(a, b){ return b ? Math.round(a / b * 100) + "%" : "—"; }
+function variacionHtml(actual, base, etiqueta){
+  if(!base) return `<span class="kpi-delta">sin dato de ${etiqueta}</span>`;
+  const v = Math.round((actual - base) / base * 100);
+  const cls = v > 0 ? "up" : (v < 0 ? "down" : "");
+  const flecha = v > 0 ? "▲" : (v < 0 ? "▼" : "＝");
+  return `<span class="kpi-delta ${cls}">${flecha} ${Math.abs(v)}%</span> <span class="kpi-delta-txt">vs. ${etiqueta}</span>`;
+}
+
+// ---------- Historial de etapas ----------
+async function cargarHistorialEtapas(){
+  if(!ACCESO.listo) return;
+  try{
+    let rows = null;
+    if(ACCESO.activo){
+      try{ rows = await leerFuenteProtegida("historial"); }
+      catch(e){ if(!e.noExiste) throw e; }
+    } else {
+      const url = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?sheet=${encodeURIComponent(HISTORIAL_SHEET_NAME)}&headers=1&tqx=out:json;responseHandler:__gvizCallbackH`;
+      const data = await jsonpGenerico(url, "__gvizCallbackH", 20000);
+      if(data && data.status !== "error" && data.table) rows = gvizToRows(data);
+    }
+    if(!rows || rows.length < 2){
+      hEtapas = []; hEstado = "sin-historial";
+    } else {
+      const h = rows[0];
+      const iF = findColIndex(h, ["FECHA"]), iN = findColIndex(h, ["NID"]), iT = findColIndex(h, ["TIPO"]),
+            iE = findColIndex(h, ["ETAPA"]), iO = findColIndex(h, ["ORIGEN"]);
+      if(iF === -1 || iN === -1 || iE === -1){ hEtapas = []; hEstado = "sin-historial"; }
+      else {
+        hEtapas = rows.slice(1).map(r => ({
+          fecha: parseFecha(String(r[iF] || "").trim()), nid: String(r[iN] || "").trim(),
+          tipo: iT === -1 ? "LEGAL" : String(r[iT] || "").trim().toUpperCase(),
+          etapa: String(r[iE] || "").trim(), origen: iO === -1 ? "" : String(r[iO] || "").trim()
+        })).filter(e => e.fecha && e.nid);
+        hEstado = "activa";
+      }
+    }
+  } catch(err){
+    hEstado = hEtapas.length ? "activa" : "error";
+    console.warn("HistorialEtapas: no se pudo leer:", err);
+  }
+  renderDireccion();
+}
+setInterval(() => { if(!document.hidden) cargarHistorialEtapas(); }, 5 * 60 * 1000);
+
+// Para cada negocio: tramos de su etapa de legalización [{etapa, desde, origen}], en orden.
+function tramosLegales(){
+  const m = new Map();
+  hEtapas.forEach(e => {
+    if(e.tipo !== "LEGAL") return;
+    const et = canonEtapaLegal(e.etapa);
+    const lista = m.get(e.nid) || [];
+    const ult = lista[lista.length - 1];
+    if(ult && ult.etapa === et) return;          // misma etapa: el tramo sigue abierto
+    lista.push({ etapa: et, desde: e.fecha, origen: e.origen });
+    m.set(e.nid, lista);
+  });
+  return m;
+}
+
+// ---------- Cálculos ----------
+function calcDesembolsosMes(ym, hastaDia){
+  let v = 0, c = 0;
+  tramitesEnriched.forEach(r => {
+    if(!r.fechaRefAP || r.fechaRefAP.slice(0, 7) !== ym) return;
+    if(hastaDia && +r.fechaRefAP.slice(8, 10) > hastaDia) return;
+    v += r.valorDesembolso || 0; c++;
+  });
+  return { v, c };
+}
+
+function pesoProyeccion(av){
+  const k = canonEtapaAV(av);
+  if(!k) return PROYECCION_PESO_SIN_ETAPA;
+  return PROYECCION_PESOS[k] ?? PROYECCION_PESO_SIN_ETAPA;
+}
+
+function calcProyeccion(){
+  const hoy = hoyLocalISO(), y = +hoy.slice(0, 4), m0 = +hoy.slice(5, 7) - 1, dia = +hoy.slice(8, 10);
+  const ym = hoy.slice(0, 7);
+  const radicado = calcDesembolsosMes(ym);
+  const habTot = diasHabilesMes(y, m0, 1), habRest = diasHabilesMes(y, m0, dia + 1);
+  const fr = habTot ? habRest / habTot : 0;
+  const pendientes = tramitesEnriched.filter(r => !r.finalizado && !r.fechaRefAP && r.valorDesembolso > 0);
+  const grupos = {};
+  let esperado = 0, minimo = 0, maximo = 0;
+  const items = pendientes.map(r => {
+    const p = pesoProyeccion(r.etapaAV), f = p >= PROB_INMINENTE ? 1 : fr;
+    const aporte = r.valorDesembolso * p * f;
+    esperado += aporte;
+    if(p >= PROB_INMINENTE) minimo += r.valorDesembolso * p;
+    maximo += p >= 0.5 ? r.valorDesembolso : aporte;
+    const k = canonEtapaAV(r.etapaAV) || "SIN ETAPA";
+    const g = grupos[k] || (grupos[k] = { etapa:k, n:0, valor:0, p, f, aporte:0 });
+    g.n++; g.valor += r.valorDesembolso; g.aporte += aporte;
+    return { r, p, aporte };
+  });
+  return {
+    ym, radicado, habRest, habTot, fr,
+    esperado: radicado.v + esperado, minimo: radicado.v + minimo, maximo: radicado.v + maximo,
+    soloPendiente: esperado,
+    grupos: Object.values(grupos).sort((a, b) => b.p - a.p || b.aporte - a.aporte),
+    items: items.sort((a, b) => b.aporte - a.aporte)
+  };
+}
+
+function calcCuellos(analista){
+  const hoy = new Date();
+  const tramos = tramosLegales();
+  const activos = tramitesEnriched.filter(r => !r.finalizado && (analista === "todos" || r.analista === analista));
+  const porEtapa = {};
+  const orden = [...ETAPA_LEGAL_OPCIONES];
+  const negocios = activos.map(r => {
+    const lista = tramos.get(r.nid) || [];
+    const ult = lista[lista.length - 1];
+    let dias = null, desdeInicio = false;
+    if(ult && ult.etapa === r.etapaLegal){ dias = diasHabilesDesde(ult.desde, hoy); desdeInicio = ult.origen === "inicio"; }
+    if(!orden.includes(r.etapaLegal)) orden.push(r.etapaLegal);
+    const g = porEtapa[r.etapaLegal] || (porEtapa[r.etapaLegal] = { etapa:r.etapaLegal, n:0, valor:0, conDias:0, sumaDias:0, demorados:0, max:0, histSuma:0, histN:0 });
+    g.n++; g.valor += r.valorDesembolso || 0;
+    if(dias !== null){ g.conDias++; g.sumaDias += dias; g.max = Math.max(g.max, dias); if(dias > UMBRAL_DIAS_ETAPA) g.demorados++; }
+    return { r, dias, desdeInicio };
+  });
+  // Promedio histórico: tramos ya cerrados (sin contar los que arrancan en el punto de partida)
+  tramos.forEach(lista => {
+    for(let i = 0; i < lista.length - 1; i++){
+      const t = lista[i];
+      if(t.origen === "inicio") continue;
+      const d = diasHabilesDesde(t.desde, new Date(lista[i + 1].desde + "T00:00:00"));
+      const g = porEtapa[t.etapa] || (porEtapa[t.etapa] = { etapa:t.etapa, n:0, valor:0, conDias:0, sumaDias:0, demorados:0, max:0, histSuma:0, histN:0 });
+      g.histSuma += d; g.histN++;
+      if(!orden.includes(t.etapa)) orden.push(t.etapa);
+    }
+  });
+  const filas = orden.map(e => porEtapa[e]).filter(Boolean);
+  return { filas, negocios, activos };
+}
+
+const CALIDAD_CHEQUEOS = [
+  { id:"analista", label:"Sin analista asignado", test: r => r.analista === "Sin asignar", completo:true },
+  { id:"etapa", label:"Sin etapa de legalización válida (AG)", test: r => !ETAPA_LEGAL_OPCIONES.includes(r.etapaLegal), completo:true },
+  { id:"av", label:"Sin etapa de desembolso (AV)", test: r => !r.etapaAV, completo:true },
+  { id:"valor", label:"Sin valor del desembolso", test: r => !(r.valorDesembolso > 0), completo:true },
+  { id:"gestion", label:"Sin fecha de gestión", test: r => !r.fechaGestion, completo:true },
+  { id:"radicacion", label:"Desembolsado o con fecha de desembolso, pero sin fecha de radicación (AP)",
+    test: r => !r.fechaRefAP && (!!r.fechaDesembolso || ["RADICADO DESEMBOLSO","DESEMBOLSADO"].includes(canonEtapaAV(r.etapaAV))), completo:false }
+];
+function calcCalidad(){
+  const activos = tramitesEnriched.filter(r => !r.finalizado);
+  const chequeos = CALIDAD_CHEQUEOS.map(c => ({ ...c, negocios: activos.filter(c.test) }));
+  const incompleto = r => CALIDAD_CHEQUEOS.some(c => c.completo && c.test(r));
+  const completos = activos.filter(r => !incompleto(r)).length;
+  const porAnalista = {};
+  activos.forEach(r => {
+    const a = porAnalista[r.analista] || (porAnalista[r.analista] = { a:r.analista, n:0, ok:0, problemas:0 });
+    a.n++;
+    const p = CALIDAD_CHEQUEOS.filter(c => c.test(r)).length;
+    if(!incompleto(r)) a.ok++;
+    a.problemas += p;
+  });
+  return { activos, chequeos, completos, pct: activos.length ? Math.round(completos / activos.length * 100) : 100,
+           analistas: Object.values(porAnalista).sort((x, y) => (x.ok / x.n) - (y.ok / y.n) || y.n - x.n) };
+}
+
+function calcMetaSemana(){
+  const hoy = hoyLocalISO(), lunes = semLunes(hoy);
+  const activos = tramitesEnriched.filter(r => !r.finalizado);
+  const gest = construirGestiones(hoy);
+  const filas = statsDiarias(activos, gest.filter(e => e.fecha === hoy));
+  const evaluados = filas.filter(f => f.meta > 0);
+  const diasTrans = Math.min(DIAS_SEMANA_LABORAL, Math.round((semFecha(semFechaEfectiva(hoy)) - semFecha(lunes)) / 86400000) + 1);
+  const gSem = gest.filter(e => { const f = semFechaEfectiva(e.fecha); return f >= lunes && f <= hoy; }).length;
+  const metaCorte = evaluados.reduce((s, f) => s + f.meta, 0) * diasTrans;
+  return { gSem, metaCorte, diasTrans, cumplieron: evaluados.filter(f => f.cumplio).length, evaluados: evaluados.length };
+}
+
+function calcSlaVerano(ym){
+  const entregados = veranoEntregadosConDias().filter(r => r.fechaEntrega.slice(0, 7) === ym);
+  const ok = entregados.filter(r => r.diasHab <= VERANO_SLA_DIAS).length;
+  const prom = entregados.length ? entregados.reduce((s, r) => s + r.diasHab, 0) / entregados.length : 0;
+  return { t: entregados.length, ok, prom };
+}
+
+// ---------- Dibujo ----------
+function renderDireccion(){
+  if(!document.getElementById("tab-dir-resumen")) return;
+  try{
+    renderDirResumen();
+    renderDirCuellos();
+    renderDirProyeccion();
+    renderDirCalidad();
+  } catch(err){ console.warn("Dirección: error al dibujar", err); }
+}
+
+function kpiHtml({ label, valor, delta = "", sub = "", destacado = false }){
+  return `<div class="kpi${destacado ? " kpi-destacado" : ""}">
+    <div class="metric-label">${label}</div>
+    <div class="kpi-valor">${valor}</div>
+    ${delta ? `<div class="kpi-linea">${delta}</div>` : ""}
+    ${sub ? `<div class="metric-sub">${sub}</div>` : ""}
+  </div>`;
+}
+
+function renderDirResumen(){
+  const el = id => document.getElementById(id);
+  const hoy = hoyLocalISO(), ymHoy = hoy.slice(0, 7), dia = +hoy.slice(8, 10);
+  // Selector de mes: los 12 últimos meses
+  const meses = []; for(let i = 0; i < 12; i++) meses.push(mesSumar(ymHoy, -i));
+  const sel = el("dir-mes");
+  const ym = meses.includes(dirMesSel) ? dirMesSel : ymHoy;
+  const firma = meses.join(",");
+  if(sel.dataset.firma !== firma){
+    sel.innerHTML = meses.map(m => `<option value="${m}">${mesNombre(m)}${m === ymHoy ? " (en curso)" : ""}</option>`).join("");
+    sel.dataset.firma = firma;
+  }
+  sel.value = ym;
+  const enCurso = ym === ymHoy;
+  const ymPrev = mesSumar(ym, -1), ymAnio = mesSumar(ym, -12);
+
+  el("dir-titulo").textContent = "Resumen de " + mesNombre(ym);
+  el("dir-sub").textContent = enCurso ? `Mes en curso, con corte al ${dia} de ${MESES_LARGOS[+ymHoy.slice(5, 7) - 1]}.` : "Mes cerrado.";
+  el("dir-imp-fecha").textContent = "Generado el " + new Date().toLocaleDateString("es-CO", { day:"numeric", month:"long", year:"numeric" }) +
+    " a las " + new Date().toLocaleTimeString("es-CO", { hour:"2-digit", minute:"2-digit" });
+
+  const corte = enCurso ? dia : 0;
+  const des = calcDesembolsosMes(ym), desPrev = calcDesembolsosMes(ymPrev, corte), desAnio = calcDesembolsosMes(ymAnio, corte);
+  const proy = calcProyeccion();
+  const activos = tramitesEnriched.filter(r => !r.finalizado);
+  const valorActivos = activos.reduce((s, r) => s + (r.valorDesembolso || 0), 0);
+  const avanzados = activos.filter(r => !r.fechaRefAP && pesoProyeccion(r.etapaAV) >= PROB_INMINENTE).length;
+  const meta = calcMetaSemana();
+  const sla = calcSlaVerano(ym);
+  const cuellos = calcCuellos("todos");
+  const calidad = calcCalidad();
+  const etiquetaPrev = enCurso ? "mismo corte de " + MESES_LARGOS[+ymPrev.slice(5, 7) - 1] : mesNombre(ymPrev);
+
+  const kpis = [
+    kpiHtml({ label: enCurso ? "Desembolsos radicados a la fecha" : "Desembolsos radicados en el mes", valor: fmtValor(des.v) === "—" ? "$ 0" : fmtValor(des.v),
+              delta: variacionHtml(des.v, desPrev.v, etiquetaPrev) + "<br>" + variacionHtml(des.v, desAnio.v, enCurso ? "mismo corte de hace un año" : mesNombre(ymAnio)),
+              sub: `${des.c} negocio${des.c === 1 ? "" : "s"}`, destacado: true }),
+    enCurso
+      ? kpiHtml({ label:"Cierre estimado del mes", valor: fmtValor(proy.esperado) === "—" ? "$ 0" : fmtValor(proy.esperado),
+                  sub:`Rango ${fmtValor(proy.minimo) === "—" ? "$ 0" : fmtValor(proy.minimo)} – ${fmtValor(proy.maximo) === "—" ? "$ 0" : fmtValor(proy.maximo)} · estimado con probabilidades por etapa, ver Proyección` })
+      : kpiHtml({ label:"Valor promedio por negocio", valor: des.c ? fmtValor(des.v / des.c) : "—", sub:`${des.c} negocios radicados en el mes` }),
+    kpiHtml({ label:"Negocios en curso", valor: String(activos.length), sub:`${fmtValor(valorActivos)} en valor · ${avanzados} listos para radicar` }),
+    kpiHtml({ label:"Meta de gestión, semana en curso", valor: pctTxt(meta.gSem, meta.metaCorte),
+              sub:`${meta.gSem} de ${meta.metaCorte} gestiones esperadas a hoy · ${meta.cumplieron} de ${meta.evaluados} analistas cumplieron hoy` }),
+    kpiHtml({ label:"SLA estudio de títulos Verano", valor: sla.t ? pctTxt(sla.ok, sla.t) : "—",
+              sub: sla.t ? `${sla.ok} de ${sla.t} estudios entregados a tiempo · ${sla.prom.toFixed(1)} días hábiles en promedio` : "Sin estudios entregados en el mes" })
+  ];
+  el("dir-kpis").innerHTML = kpis.join("");
+
+  // Frase automática
+  const frases = [];
+  const varPrev = desPrev.v ? Math.round((des.v - desPrev.v) / desPrev.v * 100) : null;
+  frases.push(`${enCurso ? "En lo que va de" : "En"} ${mesNombre(ym)} se ${enCurso ? "han radicado" : "radicaron"} desembolsos por <b>${fmtValor(des.v) === "—" ? "$ 0" : fmtValor(des.v)}</b> en ${des.c} negocio${des.c === 1 ? "" : "s"}` +
+    (varPrev === null ? "." : `, ${Math.abs(varPrev)}% ${varPrev >= 0 ? "más" : "menos"} que ${enCurso ? "al mismo corte del mes anterior" : "en " + mesNombre(ymPrev)}.`));
+  if(enCurso) frases.push(`Con lo que está en curso, el cierre estimado del mes es <b>${fmtValor(proy.esperado) === "—" ? "$ 0" : fmtValor(proy.esperado)}</b>.`);
+  if(hEstado === "activa"){
+    const peor = [...cuellos.filas].sort((a, b) => (b.demorados - a.demorados) || (b.n - a.n) || a.etapa.localeCompare(b.etapa))[0];
+    frases.push(peor && peor.demorados ? `El mayor cuello de botella está en <b>${peor.etapa}</b>: ${peor.demorados} negocio${peor.demorados === 1 ? " lleva" : "s llevan"} más de ${UMBRAL_DIAS_ETAPA} días hábiles ahí.`
+                                       : "Ninguna etapa tiene negocios demorados.");
+  }
+  if(meta.metaCorte) frases.push(`En la semana el equipo lleva el ${pctTxt(meta.gSem, meta.metaCorte)} de la meta de gestión.`);
+  if(calidad.pct < 90) frases.push(`${calidad.activos.length - calidad.completos} negocios en curso tienen datos incompletos.`);
+  el("dir-frase").innerHTML = frases.join(" ");
+
+  renderDirGrafico(ymHoy, proy);
+
+  const demoradosTot = cuellos.filas.reduce((s, f) => s + f.demorados, 0);
+  const dest = [
+    { tab:"dir-cuellos", titulo:"Cuellos de botella",
+      valor: hEstado === "activa" ? `${demoradosTot} demorado${demoradosTot === 1 ? "" : "s"}` : "Sin historial",
+      sub: hEstado === "activa" ? `Negocios con más de ${UMBRAL_DIAS_ETAPA} días hábiles en su etapa` : "Se activa con configurarHistorialEtapas" },
+    { tab:"dir-proyeccion", titulo:"Proyección del mes", valor: fmtValor(proy.soloPendiente) === "—" ? "$ 0" : fmtValor(proy.soloPendiente), sub:"Esperado por radicar en lo que queda del mes" },
+    { tab:"dir-calidad", titulo:"Calidad de datos", valor: calidad.pct + "%", sub:`${calidad.completos} de ${calidad.activos.length} negocios en curso completos` }
+  ];
+  el("dir-destacados").innerHTML = dest.map(d => `
+    <button type="button" class="dest-card no-print-btn" data-ir="${d.tab}">
+      <span class="dest-titulo">${d.titulo}</span>
+      <span class="dest-valor">${d.valor}</span>
+      <span class="dest-sub">${d.sub}</span>
+      <span class="dest-ir">Ver detalle</span>
+    </button>`).join("");
+  el("dir-destacados").querySelectorAll("[data-ir]").forEach(b => b.onclick = () => { mostrarVista(b.dataset.ir); window.scrollTo(0, 0); });
+}
+
+function renderDirGrafico(ymHoy, proy){
+  const nMeses = window.innerWidth < 600 ? 6 : 12, ult = nMeses - 1;
+  const meses = []; for(let i = ult; i >= 0; i--) meses.push(mesSumar(ymHoy, -i));
+  const vals = meses.map(m => calcDesembolsosMes(m).v);
+  const extra = Math.max(0, proy.esperado - vals[ult]);
+  const maxV = Math.max(...vals, vals[ult] + extra, 1);
+  const W = nMeses === 6 ? 520 : 960, H = 250, padL = 8, padR = 8, padT = 26, padB = 34, chartH = H - padT - padB;
+  const slot = (W - padL - padR) / meses.length, barW = Math.min(46, slot * 0.62);
+  const y = v => padT + chartH - (v / maxV) * chartH;
+  const corto = v => v ? "$" + FMT_MILLONES.format(Math.round(v / 1e6)) + "M" : "";
+  let svg = `<svg viewBox="0 0 ${W} ${H}" width="100%" role="img" aria-label="Desembolsos radicados por mes, últimos 12 meses" style="display:block;">`;
+  svg += `<line x1="${padL}" y1="${padT + chartH}" x2="${W - padR}" y2="${padT + chartH}" stroke="var(--line)"/>`;
+  meses.forEach((m, i) => {
+    const cx = padL + slot * i + slot / 2, x = cx - barW / 2;
+    const v = vals[i], esHoy = i === ult;
+    if(esHoy && extra > 0){
+      svg += `<rect x="${x}" y="${y(v + extra)}" width="${barW}" height="${chartH * extra / maxV}" rx="4" fill="var(--habi-purple)" opacity=".22"/>`;
+    }
+    if(v > 0) svg += `<rect x="${x}" y="${y(v)}" width="${barW}" height="${padT + chartH - y(v)}" rx="4" fill="${esHoy ? "var(--habi-purple)" : "#A78BFA"}"><title>${mesNombre(m)}: ${fmtValor(v)}</title></rect>`;
+    const etiqueta = esHoy && extra > 0 ? corto(v + extra) + "*" : corto(v);
+    if(etiqueta) svg += `<text x="${cx}" y="${y(esHoy ? v + extra : v) - 7}" text-anchor="middle" font-size="12" font-weight="700" fill="var(--ink)">${etiqueta}</text>`;
+    svg += `<text x="${cx}" y="${H - 12}" text-anchor="middle" font-size="12" fill="${esHoy ? "var(--ink)" : "var(--ink-soft)"}" font-weight="${esHoy ? 700 : 500}">${MESES[+m.slice(5, 7) - 1]}${m.slice(5, 7) === "01" || i === 0 ? " " + m.slice(2, 4) : ""}</text>`;
+  });
+  svg += `</svg>`;
+  document.getElementById("dir-chart").innerHTML = svg + (extra > 0 ? `<div class="dir-nota">* Mes en curso: radicado a la fecha más el cierre estimado.</div>` : "");
+}
+
+function filaNegocioHtml(r, extra){
+  return `<tr><td><span class="clickable" data-nid="${r.nid}">${r.nid}</span><span class="conjunto">${escapeHtml(r.proyecto)}</span></td>
+    <td>${escapeHtml(r.analista)}</td>${extra}<td style="text-align:right;">${fmtValor(r.valorDesembolso)}</td></tr>`;
+}
+function activarFichas(contenedor){
+  contenedor.querySelectorAll(".clickable[data-nid]").forEach(c => c.onclick = () => openTramitesModal(c.dataset.nid));
+}
+
+function renderDirCuellos(){
+  const el = id => document.getElementById(id);
+  // filtro de analista
+  const analistas = [...new Set(tramitesEnriched.filter(r => !r.finalizado).map(r => r.analista))].sort((a, b) => a.localeCompare(b));
+  const selA = el("dir-c-analista");
+  const firma = analistas.join("|");
+  if(selA.dataset.firma !== firma){
+    selA.innerHTML = `<option value="todos">Todos los analistas</option>` + analistas.map(a => `<option value="${escapeHtml(a)}">${escapeHtml(a)}</option>`).join("");
+    selA.dataset.firma = firma;
+  }
+  if(dirCuelloAnalista !== "todos" && !analistas.includes(dirCuelloAnalista)) dirCuelloAnalista = "todos";
+  selA.value = dirCuelloAnalista;
+
+  el("dir-c-sub").textContent = `Días hábiles que llevan los negocios en curso en su etapa de legalización (columna AG). Un negocio se considera demorado después de ${UMBRAL_DIAS_ETAPA} días hábiles en la misma etapa.`;
+  const aviso = el("dir-c-aviso");
+  const desdeInicio = hEtapas.some(e => e.origen === "inicio");
+  if(hEstado !== "activa"){
+    aviso.hidden = false;
+    aviso.innerHTML = hEstado === "pendiente" ? "Leyendo el historial de etapas…"
+      : hEstado === "error" ? "No se pudo leer el historial de etapas en este momento."
+      : "<b>El historial de etapas aún no está activado.</b> Sin él no se puede medir cuántos días lleva cada negocio en su etapa. Para activarlo, ejecuta <b>configurarHistorialEtapas</b> en Apps Script.";
+  } else if(desdeInicio){
+    const ini = hEtapas.find(e => e.origen === "inicio");
+    aviso.hidden = false;
+    aviso.innerHTML = `El historial empezó el <b>${fmtFecha(ini.fecha)}</b>. Para los negocios que no han cambiado de etapa desde entonces, los días se cuentan desde esa fecha (se marcan con ≥), así que pueden llevar más tiempo del que se muestra.`;
+  } else aviso.hidden = true;
+
+  const c = calcCuellos(dirCuelloAnalista);
+  const maxN = Math.max(1, ...c.filas.map(f => f.n));
+  el("dir-c-tabla").innerHTML = `<thead><tr><th>Etapa</th><th>Negocios en curso</th><th style="text-align:right;">Valor</th>
+      <th style="text-align:right;">Días promedio en la etapa</th><th style="text-align:right;">Demorados</th><th style="text-align:right;">Más antiguo</th><th style="text-align:right;">Duración histórica</th></tr></thead>
+    <tbody>${c.filas.filter(f => f.n > 0 || f.histN > 0).map(f => {
+      const st = ETAPA_LEGAL_STYLE[f.etapa] || { rgb:[156,163,175], dark:"#374151" };
+      const wTot = f.n / maxN * 100, wDem = f.n ? f.demorados / f.n * wTot : 0;
+      return `<tr class="fila-click${dirCuelloEtapa === f.etapa ? " fila-sel" : ""}" data-etapa="${escapeHtml(f.etapa)}">
+        <td><span class="dir-punto" style="background:rgb(${st.rgb.join(",")});"></span>${escapeHtml(f.etapa)}</td>
+        <td><div class="dir-barra-celda"><div class="dir-barra"><span style="width:${wTot}%"></span><span class="dem" style="width:${wDem}%"></span></div><b>${f.n}</b></div></td>
+        <td style="text-align:right;">${fmtValor(f.valor)}</td>
+        <td style="text-align:right;">${f.conDias ? (f.sumaDias / f.conDias).toFixed(1) : "—"}</td>
+        <td style="text-align:right;">${f.demorados ? `<span class="badge b-red">${f.demorados}</span>` : (f.conDias ? "0" : "—")}</td>
+        <td style="text-align:right;">${f.conDias ? f.max + " d" : "—"}</td>
+        <td style="text-align:right;" title="${f.histN} tramos cerrados">${f.histN ? (f.histSuma / f.histN).toFixed(1) + " d" : "—"}</td></tr>`;
+    }).join("") || `<tr><td colspan="7" class="no-results">No hay negocios en curso.</td></tr>`}</tbody>`;
+  el("dir-c-tabla").querySelectorAll("tr[data-etapa]").forEach(tr => tr.onclick = () => {
+    dirCuelloEtapa = dirCuelloEtapa === tr.dataset.etapa ? "" : tr.dataset.etapa;
+    renderDirCuellos();
+  });
+
+  let lista = c.negocios.filter(n => n.dias !== null);
+  if(dirCuelloEtapa) lista = c.negocios.filter(n => n.r.etapaLegal === dirCuelloEtapa);
+  lista.sort((a, b) => (b.dias ?? -1) - (a.dias ?? -1));
+  if(!dirCuelloEtapa) lista = lista.slice(0, 10);
+  el("dir-c-lista-titulo").textContent = dirCuelloEtapa ? `Negocios en «${dirCuelloEtapa}» (${lista.length}) · clic de nuevo en la etapa para quitar el filtro` : "Los 10 negocios más demorados";
+  el("dir-c-lista").innerHTML = `<thead><tr><th>Negocio</th><th>Analista</th><th>Etapa</th><th style="text-align:right;">Días en la etapa</th><th style="text-align:right;">Valor</th></tr></thead>
+    <tbody>${lista.map(n => filaNegocioHtml(n.r, `<td>${escapeHtml(n.r.etapaLegal)}</td><td style="text-align:right;">${n.dias === null ? "—" : (n.desdeInicio ? "≥ " : "") + n.dias + " d"}${n.dias !== null && n.dias > UMBRAL_DIAS_ETAPA ? ' <span class="badge b-red">demorado</span>' : ""}</td>`)).join("")
+      || `<tr><td colspan="5" class="no-results">${hEstado === "activa" ? "No hay negocios para mostrar." : "Se mostrarán cuando el historial de etapas esté activo."}</td></tr>`}</tbody>`;
+  activarFichas(el("dir-c-lista"));
+}
+
+function renderDirProyeccion(){
+  const el = id => document.getElementById(id);
+  const p = calcProyeccion();
+  const v0 = v => fmtValor(v) === "—" ? "$ 0" : fmtValor(v);
+  el("dir-p-titulo").textContent = "Proyección de " + mesNombre(p.ym);
+  el("dir-p-kpis").innerHTML = [
+    kpiHtml({ label:"Radicado a la fecha", valor: v0(p.radicado.v), sub:`${p.radicado.c} negocios con fecha en AP este mes` }),
+    kpiHtml({ label:"Esperado en lo que queda del mes", valor: v0(p.soloPendiente), sub:`${p.items.length} negocios en curso sin fecha en AP · quedan ${p.habRest} de ${p.habTot} días hábiles` }),
+    kpiHtml({ label:"Cierre estimado del mes", valor: v0(p.esperado), sub:`Rango ${v0(p.minimo)} – ${v0(p.maximo)}`, destacado:true })
+  ].join("");
+  el("dir-p-tabla").innerHTML = `<thead><tr><th>Etapa de desembolso (AV)</th><th style="text-align:right;">Negocios</th><th style="text-align:right;">Valor</th>
+      <th style="text-align:right;">Probabilidad</th><th style="text-align:right;">Aporte esperado este mes</th></tr></thead>
+    <tbody>${p.grupos.map(g => `<tr><td>${escapeHtml(g.etapa)}</td><td style="text-align:right;">${g.n}</td><td style="text-align:right;">${fmtValor(g.valor)}</td>
+      <td style="text-align:right;">${Math.round(g.p * 100)}%${g.f < 1 ? ` <span class="muted">× ${Math.round(g.f * 100)}% del mes</span>` : ""}</td>
+      <td style="text-align:right;"><b>${v0(g.aporte)}</b></td></tr>`).join("") || `<tr><td colspan="5" class="no-results">No hay negocios en curso sin fecha de radicación.</td></tr>`}</tbody>`;
+  el("dir-p-nota").innerHTML = `Cómo se calcula: cada negocio en curso con valor y sin fecha en AP aporta su valor por la probabilidad de su etapa.
+    Desde ${Math.round(PROB_INMINENTE * 100)}% se asume que radica este mes; por debajo, la probabilidad se ajusta a los días hábiles que quedan.
+    El rango va de contar solo los negocios casi listos a contar completos los que tienen 50% o más.
+    Las probabilidades son supuestos iniciales: ajústalas en <b>PROYECCION_PESOS</b> (index.html y Codigo.gs) cuando haya historial para calibrarlas.`;
+  el("dir-p-lista").innerHTML = `<thead><tr><th>Negocio</th><th>Analista</th><th>Etapa (AV)</th><th style="text-align:right;">Probabilidad</th><th style="text-align:right;">Valor</th></tr></thead>
+    <tbody>${p.items.slice(0, 12).map(it => filaNegocioHtml(it.r, `<td>${escapeHtml(canonEtapaAV(it.r.etapaAV) || "Sin etapa")}</td><td style="text-align:right;">${Math.round(it.p * 100)}%</td>`)).join("")
+      || `<tr><td colspan="5" class="no-results">No hay negocios pendientes de radicar.</td></tr>`}</tbody>`;
+  activarFichas(el("dir-p-lista"));
+}
+
+function renderDirCalidad(){
+  const el = id => document.getElementById(id);
+  const q = calcCalidad();
+  const aviso = el("dir-q-aviso");
+  aviso.hidden = !tAvisoColumnas;
+  if(tAvisoColumnas) aviso.innerHTML = "<b>Columnas del Sheet desplazadas:</b> " + escapeHtml(tAvisoColumnas.replace(/^ · ⚠ Revisa las columnas del Sheet → /, ""));
+  const conProblema = q.activos.length - q.completos;
+  el("dir-q-kpis").innerHTML = [
+    kpiHtml({ label:"Negocios completos", valor: q.pct + "%", sub:`${q.completos} de ${q.activos.length} negocios en curso`, destacado:true }),
+    kpiHtml({ label:"Con datos incompletos", valor: String(conProblema), sub:"Les falta al menos un dato básico" }),
+    kpiHtml({ label:"Inconsistencias de fechas", valor: String(q.chequeos.find(c => c.id === "radicacion").negocios.length), sub:"Desembolsados sin fecha de radicación (AP)" })
+  ].join("");
+  const maxN = Math.max(1, ...q.chequeos.map(c => c.negocios.length));
+  el("dir-q-tabla").innerHTML = `<thead><tr><th>Revisión</th><th>Negocios</th><th style="text-align:right;">% de los en curso</th></tr></thead>
+    <tbody>${q.chequeos.map(c => `<tr class="fila-click${dirCalidadSel === c.id ? " fila-sel" : ""}" data-q="${c.id}">
+      <td>${c.negocios.length ? "" : "✓ "}${c.label}</td>
+      <td><div class="dir-barra-celda"><div class="dir-barra"><span class="${c.negocios.length ? "dem" : ""}" style="width:${c.negocios.length / maxN * 100}%"></span></div><b>${c.negocios.length}</b></div></td>
+      <td style="text-align:right;">${pctTxt(c.negocios.length, q.activos.length)}</td></tr>`).join("")}</tbody>`;
+  el("dir-q-tabla").querySelectorAll("tr[data-q]").forEach(tr => tr.onclick = () => {
+    dirCalidadSel = dirCalidadSel === tr.dataset.q ? "" : tr.dataset.q;
+    renderDirCalidad();
+  });
+  const selC = q.chequeos.find(c => c.id === dirCalidadSel);
+  el("dir-q-detalle-card").hidden = !selC;
+  if(selC){
+    el("dir-q-detalle-titulo").textContent = `${selC.label} (${selC.negocios.length})`;
+    el("dir-q-detalle").innerHTML = `<thead><tr><th>Negocio</th><th>Analista</th><th>Etapa</th><th style="text-align:right;">Valor</th></tr></thead>
+      <tbody>${selC.negocios.slice(0, 200).map(r => filaNegocioHtml(r, `<td>${escapeHtml(r.etapaLegal)}</td>`)).join("") || `<tr><td colspan="4" class="no-results">Todo en orden.</td></tr>`}</tbody>`;
+    activarFichas(el("dir-q-detalle"));
+  }
+  el("dir-q-analistas").innerHTML = `<thead><tr><th>Analista</th><th style="text-align:right;">Negocios en curso</th><th>Completos</th><th style="text-align:right;" title="Incluye datos faltantes e inconsistencias de fechas">Alertas</th></tr></thead>
+    <tbody>${q.analistas.map(a => {
+      const p = Math.round(a.ok / a.n * 100);
+      return `<tr><td>${escapeHtml(a.a)}</td><td style="text-align:right;">${a.n}</td>
+        <td><div class="dir-barra-celda"><div class="dir-barra"><span class="${p >= 90 ? "ok" : (p >= 70 ? "med" : "dem")}" style="width:${p}%"></span></div><b>${p}%</b></div></td>
+        <td style="text-align:right;">${a.problemas}</td></tr>`;
+    }).join("") || `<tr><td colspan="4" class="no-results">No hay negocios en curso.</td></tr>`}</tbody>`;
+}
+
+document.getElementById("dir-mes").addEventListener("change", e => { dirMesSel = e.target.value; renderDirResumen(); });
+document.getElementById("dir-c-analista").addEventListener("change", e => { dirCuelloAnalista = e.target.value; dirCuelloEtapa = ""; renderDirCuellos(); });
+document.getElementById("dir-pdf").addEventListener("click", () => {
+  mostrarVista("dir-resumen");
+  renderDirResumen();
+  setTimeout(() => window.print(), 60);
+});
+
 // ---- Estado de conexión en el encabezado y esqueletos de carga ----
 const PANELES_POR_FUENTE = {
   registro: ["resumen", "mensual", "metricas"],
   tramites: ["tramites", "tramites-metricas", "tramites-desemb"],
   verano:   ["verano"]
 };
-const FUENTE_POR_AREA = { registro:"registro", tramites:"tramites", verano:"verano" };
+PANELES_POR_FUENTE.tramites.push("dir-resumen", "dir-cuellos", "dir-proyeccion", "dir-calidad");
+const FUENTE_POR_AREA = { direccion:"tramites", registro:"registro", tramites:"tramites", verano:"verano" };
 const NOMBRE_FUENTE = { registro:"Registro", tramites:"Trámites", verano:"Estudio de títulos" };
 const estadoFuentes = { registro:{ ok:null, t:0 }, tramites:{ ok:null, t:0 }, verano:{ ok:null, t:0 } };
 
@@ -2185,7 +2987,7 @@ document.querySelectorAll(".area-btn").forEach(btn=>{
 });
 function vistaDesdeEnlace(){
   const h = (location.hash || "").replace(/^#/, "");
-  mostrarVista(document.querySelector(`.tab-btn[data-tab="${h}"]`) ? h : "resumen", false);
+  mostrarVista(document.querySelector(`.tab-btn[data-tab="${h}"]`) ? h : "dir-resumen", false);
 }
 window.addEventListener("hashchange", vistaDesdeEnlace);
 vistaDesdeEnlace();
@@ -2316,9 +3118,10 @@ async function saveField(nid, field, value){
     const res = await fetch(WEBAPP_URL, {
       method: "POST",
       headers: { "Content-Type": "text/plain;charset=utf-8" },
-      body: JSON.stringify({ nid, field, value })
+      body: JSON.stringify({ codigo: ACCESO.codigo, nid, field, value })
     });
     const data = await res.json();
+    if(data && data.acceso && !data.success) sesionVencida();
     if(!data.success) throw new Error(data.error || "Error desconocido");
     setEditStatus("✓ Guardado. Actualizando datos…", "ok");
     await loadData(true);
@@ -2449,9 +3252,10 @@ document.getElementById("add-comment-btn").addEventListener("click", async ()=>{
     const res = await fetch(WEBAPP_URL, {
       method: "POST",
       headers: { "Content-Type": "text/plain;charset=utf-8" },
-      body: JSON.stringify({ nid, field: "comentario", value: sheetDate + "\n" + textVal })
+      body: JSON.stringify({ codigo: ACCESO.codigo, nid, field: "comentario", value: sheetDate + "\n" + textVal })
     });
     const data = await res.json();
+    if(data && data.acceso && !data.success) sesionVencida();
     if(!data.success) throw new Error(data.error || "Error desconocido");
     setEditStatus("✓ Comentario guardado (historial local + Google Sheets).", "ok");
   } catch(err){
@@ -2717,6 +3521,8 @@ function jsonpGenerico(url, cbName, timeoutMs){
     }
     window[cbName] = d => finish(d);
     script.onerror = () => finish(null, new Error("Error cargando script JSONP"));
+    // Si el script cargó pero no llamó al callback (p. ej. respondió JSON simple), no hay que esperar al timeout.
+    script.onload = () => setTimeout(() => finish(null, new Error("La respuesta no trajo datos (callback no llamado)")), 0);
     script.src = url;
     document.body.appendChild(script);
   });
@@ -2729,13 +3535,22 @@ async function cargarBitacora(){
   tBitacoraCargando = true;
   try{
     const d = new Date(); d.setDate(d.getDate() - BITACORA_DIAS_ATRAS);
-    const tq = encodeURIComponent(`select A,B,C where A >= '${isoLocal(d)}'`);
-    const url = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?sheet=${encodeURIComponent(BITACORA_SHEET_NAME)}&headers=1&tq=${tq}&tqx=out:json;responseHandler:__gvizCallbackB`;
-    const data = await jsonpGenerico(url, "__gvizCallbackB", 20000);
-    if(!data || data.status === "error" || !data.table){
+    const desdeISO = isoLocal(d);
+    let rows = null;
+    if(ACCESO.activo){
+      try{ rows = await leerFuenteProtegida("bitacora"); }
+      catch(e){ if(!e.noExiste) throw e; }
+      if(rows) rows = [rows[0], ...rows.slice(1).filter(r => String(r[0] || "").slice(0, 10) >= desdeISO)];
+    } else {
+      const tq = encodeURIComponent(`select A,B,C where A >= '${desdeISO}'`);
+      const url = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?sheet=${encodeURIComponent(BITACORA_SHEET_NAME)}&headers=1&tq=${tq}&tqx=out:json;responseHandler:__gvizCallbackB`;
+      const data = await jsonpGenerico(url, "__gvizCallbackB", 20000);
+      if(data && data.status !== "error" && data.table) rows = gvizToRows(data);
+    }
+    if(!rows || !rows.length){
       tBitacora = []; tBitacoraEstado = "sin-bitacora";
     } else {
-      const rows = gvizToRows(data), h = rows[0];
+      const h = rows[0];
       const iF = findColIndex(h, ["FECHA"]), iN = findColIndex(h, ["NID"]), iA = findColIndex(h, ["ANALISTA"]);
       if(iF === -1 || iN === -1){ tBitacora = []; tBitacoraEstado = "sin-bitacora"; }
       else {
@@ -2752,6 +3567,7 @@ async function cargarBitacora(){
     tBitacoraCargando = false;
   }
   renderControlDiario();
+  renderDireccion();
 }
 
 // Une la bitácora con la última fecha de gestión que hoy tiene cada negocio en el Sheet.
@@ -2777,7 +3593,9 @@ async function _loadTramitesCore(){
   try{
     if(!TRAMITES_GID) throw new Error("Falta configurar TRAMITES_GID");
     let rows;
-    try{
+    if(ACCESO.activo){
+      rows = await leerFuenteProtegida("tramites");
+    } else try{
       const gvizData = await loadViaJSONP_T(TRAMITES_GVIZ_URL, 20000);
       if(!gvizData || !gvizData.table) throw new Error("Respuesta gviz inválida");
       rows = gvizToRows(gvizData);
@@ -2847,6 +3665,7 @@ async function _loadTramitesCore(){
 
 // Carga garantizando que NUNCA haya dos lecturas simultáneas (comparten el mismo callback JSONP).
 async function loadTramitesData(){
+  if(!ACCESO.listo) return;
   while(tLoadPromise){ try{ await tLoadPromise; } catch(e){} }
   tLoadPromise = _loadTramitesCore().finally(() => { tLoadPromise = null; });
   return tLoadPromise;
@@ -3831,6 +4650,7 @@ function renderTramitesAll(){
   renderEtapaLegalPorAnalista(overviewRows);
   renderTramitesTable(rows);
   renderTramitesDesembolsos();
+  renderDireccion();
 }
 
 function openTramitesModal(nid){
@@ -3925,9 +4745,10 @@ async function postTramites(nid, field, value){
   const res = await fetch(WEBAPP_URL, {
     method: "POST",
     headers: { "Content-Type": "text/plain;charset=utf-8" },
-    body: JSON.stringify({ nid, field, value, sheet: TRAMITES_SHEET_NAME })
+    body: JSON.stringify({ codigo: ACCESO.codigo, nid, field, value, sheet: TRAMITES_SHEET_NAME })
   });
   const data = await res.json();
+  if(data && data.acceso && !data.success) sesionVencida();
   if(!data.success) throw new Error(data.error || "Error desconocido");
   return data;
 }
@@ -4148,16 +4969,17 @@ document.getElementById("t-add-comment-btn").addEventListener("click", async ()=
     const res = await fetch(WEBAPP_URL, {
       method: "POST",
       headers: { "Content-Type": "text/plain;charset=utf-8" },
-      body: JSON.stringify({ nid, field: "observacion", value: sheetDate + "\n" + textVal, sheet: TRAMITES_SHEET_NAME })
+      body: JSON.stringify({ codigo: ACCESO.codigo, nid, field: "observacion", value: sheetDate + "\n" + textVal, sheet: TRAMITES_SHEET_NAME })
     });
     const data = await res.json();
+    if(data && data.acceso && !data.success) sesionVencida();
     if(!data.success) throw new Error(data.error || "Error desconocido");
 
     // 3) La misma fecha que se usó para la observación se replica en FECHA DE GESTION (columna AL)
     const resFecha = await fetch(WEBAPP_URL, {
       method: "POST",
       headers: { "Content-Type": "text/plain;charset=utf-8" },
-      body: JSON.stringify({ nid, field: "fechaGestion", value: dateVal, sheet: TRAMITES_SHEET_NAME })
+      body: JSON.stringify({ codigo: ACCESO.codigo, nid, field: "fechaGestion", value: dateVal, sheet: TRAMITES_SHEET_NAME })
     });
     const dataFecha = await resFecha.json();
     if(!dataFecha.success) throw new Error(dataFecha.error || "Error desconocido al actualizar fecha de gestión");
@@ -4172,7 +4994,6 @@ document.getElementById("t-add-comment-btn").addEventListener("click", async ()=
   }
 });
 
-loadTramitesData();
 // Sincronización Sheets → Tablero: cada 30 s, al volver a la pestaña del navegador y con el botón manual.
 setInterval(() => { if(!document.hidden) loadTramitesDataSoft(); }, TRAMITES_REFRESH_MS);
 document.addEventListener("visibilitychange", () => { if(!document.hidden) loadTramitesDataSoft(); });
@@ -4298,10 +5119,11 @@ async function leerVeranoDirecto(){
 // Vía 2: lectura a través del Apps Script (usa los permisos de quien lo publicó, no requiere Sheet público).
 async function leerVeranoAppsScript(){
   if(!WEBAPP_URL) throw new Error("falta configurar WEBAPP_URL");
-  const url = `${WEBAPP_URL}?action=leer&spreadsheetId=${encodeURIComponent(VERANO_SPREADSHEET_ID)}&hoja=${encodeURIComponent(VERANO_SHEET_NAME)}&gid=${VERANO_GID}&callback=__waVerano`;
+  const url = `${WEBAPP_URL}?action=leer&spreadsheetId=${encodeURIComponent(VERANO_SPREADSHEET_ID)}&hoja=${encodeURIComponent(VERANO_SHEET_NAME)}&gid=${VERANO_GID}&codigo=${encodeURIComponent(ACCESO.codigo)}&callback=__waVerano`;
   let data;
   try{ data = await jsonpGenerico(url, "__waVerano", 25000); }
   catch(e){ throw new Error("el Apps Script no respondió (revisa que esté desplegado con acceso «Cualquier usuario» y con la versión nueva de Codigo.gs)"); }
+  if(data && data.acceso && !data.success){ sesionVencida(); }
   if(!data || !data.success) throw new Error("el Apps Script respondió: " + ((data && data.error) || "sin datos"));
   return data.rows;
 }
@@ -4315,12 +5137,13 @@ function buscarFilaEncabezado(rows, requerido){
 }
 
 async function loadVeranoData(){
+  if(!ACCESO.listo) return;
   const banner = document.getElementById("v-banner");
   const fuenteEl = document.getElementById("v-fuente");
   const fallos = [];
   try{
     let rows = null;
-    const orden = vFuenteOk === "appscript" ? ["appscript", "directa"] : ["directa", "appscript"];
+    const orden = ACCESO.activo ? ["appscript"] : (vFuenteOk === "appscript" ? ["appscript", "directa"] : ["directa", "appscript"]);
     for(const f of orden){
       try{
         rows = f === "directa" ? await leerVeranoDirecto() : await leerVeranoAppsScript();
@@ -4538,6 +5361,7 @@ function vRenderAll(){
   vRenderTable(vFilteredRows());
   const footer = document.getElementById("v-footer-note");
   footer.textContent = `${vFilteredRows().length} de ${veranoEnriched.length} registros · Sheet: Estudio de Títulos Verano · pestaña "Inmobiliaria"`;
+  renderDireccion();
 }
 
 // ---- Tiempos de vencimiento (asignación → entrega), SLA 5 días hábiles ----
@@ -4744,7 +5568,7 @@ async function handleStatusChange(nid, newStatus){
     const res = await fetch(WEBAPP_URL, {
       method: "POST",
       headers: { "Content-Type": "text/plain;charset=utf-8" },
-      body: JSON.stringify({
+      body: JSON.stringify({ codigo: ACCESO.codigo,
         nid,
         field: "estado",
         value: newStatus,
@@ -4754,6 +5578,7 @@ async function handleStatusChange(nid, newStatus){
       })
     });
     const data = await res.json();
+    if(data && data.acceso && !data.success) sesionVencida();
     if(!data.success) throw new Error(data.error || "Error desconocido");
     setVSaveStatus("✓ Guardado correctamente.", "ok");
   } catch(err){
@@ -4770,12 +5595,11 @@ async function handleStatusChange(nid, newStatus){
   }
 }
 
-loadVeranoData();
 setInterval(loadVeranoData, AUTO_REFRESH_MS);
 
 // ---- Inicio ----
-loadData(false);
 setInterval(()=>loadData(false), AUTO_REFRESH_MS);
+iniciarSesion();   // verifica el código (si el acceso está activo) y luego carga los tres Sheets
 </script>
 </body>
 </html>
